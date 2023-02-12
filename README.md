@@ -260,6 +260,24 @@ return PDFLib.measureText(
 });
 ```
 
+### Copying page from one (or multiple) PDF into another
+
+```javascript
+const filePath1 = "./myPDF1.pdf";
+const filePath2 = "./myPDF2.pdf";
+
+const pageNumber = 0;
+
+const copiedPage = PDFPage.loadFromFile(filePath1, pageNumber);
+const copiedPage2 = PDFPage.loadFromFile(filePath2, 2);
+
+const finalPath = await PDFDocument.create(
+  `${RNFS.TemporaryDirectoryPath}/Final.pdf`
+)
+  .loadPages(copiedPage, copiedPage2)
+  .write();
+```
+
 ## Manual installation
 
 #### iOS

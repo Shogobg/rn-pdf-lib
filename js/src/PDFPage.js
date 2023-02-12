@@ -55,6 +55,19 @@ export default class PDFPage {
     return newPage;
   }
 
+  static load = (pageIndex) => {
+    const newPage = new PDFPage();
+    newPage.page.pageIndex = pageIndex;
+    return newPage;
+  }
+
+  static loadFromFile = (filePath, pageIndex) => {
+    const newPage = new PDFPage();
+    newPage.page.filePath = filePath;
+    newPage.page.pageIndex = pageIndex;
+    return newPage;
+  }
+
   static modify = (pageIndex) => {
     const newPage = new PDFPage();
     newPage.page.pageIndex = pageIndex;

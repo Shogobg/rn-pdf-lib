@@ -29,7 +29,7 @@ type ImageAction = {
 
 type PageActions = TextAction | RectangleAction | ImageAction;
 
-type PageAction = {
+export type PageAction = {
   pageIndex?: number;
   mediaBox?: {
       x: number;
@@ -42,6 +42,7 @@ type PageAction = {
 
 export class PDFPage {
   static create: () => PDFPage;
+  static load: (pageIndex: any) => PDFPage;
   static modify: (pageIndex: any) => PDFPage;
   page: PageAction;
   setMediaBox: (width: number, height: number, options?: {

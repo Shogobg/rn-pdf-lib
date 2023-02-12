@@ -1,6 +1,9 @@
+import { PDFPage, PageAction } from "./PDFPage";
+
 type DocumentAction = {
   path: string;
   pages: PageAction[];
+  loadPages?: PageAction[],
   modifyPages?: PageAction[];
 };
 /**

@@ -1,11 +1,12 @@
 import PDFLib from './PDFLib';
-import PDFPage from './PDFPage';
+import { PDFPage } from './PDFPage';
 
 import type { PageAction } from './PDFPage';
 
 export type DocumentAction = {
   path: string,
   pages: PageAction[],
+  loadPages?: PageAction[],
   modifyPages?: PageAction[],
 };
 
@@ -26,6 +27,7 @@ export default class PDFDocument {
   static create = (path: string) => {
     const pdfDocument = new PDFDocument();
     pdfDocument.setPath(path);
+    pdfDocument.document.loadPages = [];
     return pdfDocument;
   }
 
@@ -33,6 +35,7 @@ export default class PDFDocument {
     const pdfDocument = new PDFDocument();
     pdfDocument.setPath(path);
     pdfDocument.document.modifyPages = [];
+    pdfDocument.document.loadPages = [];
     return pdfDocument;
   }
 
@@ -65,6 +68,20 @@ export default class PDFDocument {
     return this;
   }
 
+  loadPage = ({page} : PDFPage) => {
+    this.document.loadPages.push(page);
+
+    return this;
+  }
+
+  loadPages = (...pages: PDFPage[]) => {
+    pages.forEach(page => {
+      this.loadPage(page);
+    });
+
+    return this;
+  }
+
   addPage = ({ page }: PDFPage) => {
     if (page.pageIndex !== undefined) {
       throw new Error(
@@ -72,6 +89,7 @@ export default class PDFDocument {
         'PDFDocument.modifyPage(), instead of PDFDocument.addPage()'
       );
     }
+    
     this.document.pages.push(page);
     return this;
   };
@@ -80,6 +98,7 @@ export default class PDFDocument {
     pages.forEach(page => {
       this.addPage(page);
     });
+
     return this;
   }
 
@@ -92,7 +111,7 @@ export default class PDFDocument {
     if (this.document.modifyPages !== undefined) {
       return PDFLib.modifyPDF(this.document);
     }
-    if (this.document.pages.length < 1) {
+    if (this.document.pages.length < 1 && this.document.loadPages?.length < 1) {
       return Promise.reject('PDFDocument must have at least one page!');
     }
     return PDFLib.createPDF(this.document);

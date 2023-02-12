@@ -64,6 +64,23 @@ public class PDPageFactory {
         return page;
     }
 
+    protected static PDPage load(PDDocument document, ReadableMap pageActions) throws IOException {
+        int pageIndex = pageActions.getInt("pageIndex");
+        String filePath = pageActions.getString("filePath");
+
+        if (!filePath.isEmpty()) {
+            document = PDDocument.load(new File(filePath));
+        }
+
+        PDPage page = document.getPage(pageIndex);
+
+        PDPageFactory factory = new PDPageFactory(document, page, true);
+
+        factory.stream.close();
+
+        return page;
+    }
+
     protected static PDPage modify(PDDocument document, ReadableMap pageActions) throws IOException {
         int pageIndex = pageActions.getInt("pageIndex");
         PDPage page = document.getPage(pageIndex);

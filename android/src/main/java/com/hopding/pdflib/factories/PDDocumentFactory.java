@@ -20,16 +20,17 @@ public class PDDocumentFactory {
     private String path;
 
     private PDDocumentFactory(PDDocument document, ReadableMap documentActions) {
-        this.path     = documentActions.getString("path");
+        this.path = documentActions.getString("path");
         this.document = document;
     }
 
-            /* ----- Factory methods ----- */
+    /* ----- Factory methods ----- */
     public static PDDocument create(ReadableMap documentActions) throws NoSuchKeyException, IOException {
         PDDocument document = new PDDocument();
         PDDocumentFactory factory = new PDDocumentFactory(document, documentActions);
 
         factory.addPages(documentActions.getArray("pages"));
+        factory.loadPages(documentActions.getArray("loadPages"));
         return document;
     }
 
@@ -40,24 +41,32 @@ public class PDDocumentFactory {
 
         factory.modifyPages(documentActions.getArray("modifyPages"));
         factory.addPages(documentActions.getArray("pages"));
+        factory.loadPages(documentActions.getArray("loadPages"));
         return document;
     }
 
-            /* ----- Document actions (based on JSON structures sent over bridge) ----- */
+    /* ----- Document actions (based on JSON structures sent over bridge) ----- */
     private void addPages(ReadableArray pages) throws IOException {
-        for(int i = 0; i < pages.size(); i++) {
+        for (int i = 0; i < pages.size(); i++) {
             PDPage page = PDPageFactory.create(document, pages.getMap(i));
             document.addPage(page);
         }
     }
 
+    private void loadPages(ReadableArray pages) throws IOException {
+        for (int i = 0; i < pages.size(); i++) {
+            PDPage page = PDPageFactory.load(document, pages.getMap(i));
+            document.addPage(page);
+        }
+    }
+
     private void modifyPages(ReadableArray pages) throws IOException {
-        for(int i = 0; i < pages.size(); i++) {
+        for (int i = 0; i < pages.size(); i++) {
             PDPageFactory.modify(document, pages.getMap(i));
         }
     }
 
-            /* ----- Static utilities ----- */
+    /* ----- Static utilities ----- */
     public static String write(PDDocument document, String path) throws IOException {
         document.save(path);
         document.close();
