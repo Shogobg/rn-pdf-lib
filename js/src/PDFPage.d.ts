@@ -44,6 +44,7 @@ export class PDFPage {
   static create: () => PDFPage;
   static load: (pageIndex: any) => PDFPage;
   static modify: (pageIndex: any) => PDFPage;
+  static loadFromFile: (filePath: string, pageIndex?: number) => PDFPage;
   page: PageAction;
   setMediaBox: (width: number, height: number, options?: {
       x?: number;
