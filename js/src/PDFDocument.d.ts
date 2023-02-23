@@ -21,6 +21,8 @@ export class PDFDocument {
   setPath: (path: string) => PDFDocument;
   modifyPage: ({ page }: PDFPage) => PDFDocument;
   modifyPages: (...pages: PDFPage[]) => PDFDocument;
+  loadPage: ({ page }: PDFPage) => PDFDocument;
+  loadPages: (...pages: PDFPage[]) => PDFDocument;
   addPage: ({ page }: PDFPage) => PDFDocument;
   addPages: (...pages: PDFPage[]) => PDFDocument;
   write: () => any;
