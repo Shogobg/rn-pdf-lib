@@ -55,7 +55,7 @@ See [here](#manual-installation) for manual installation instructions (manual in
 
 ```javascript
 // Import from 'react-native-pdf-lib'
-import PDFLib, { PDFDocument, PDFPage } from 'react-native-pdf-lib';
+import PDFLib, { PDFDocument, PDFPage } from '@shogobg/react-native-pdf';
 
 // Create a PDF page with text and rectangles
 const page1 = PDFPage
@@ -118,7 +118,7 @@ PDFDocument
 
 ```javascript
 // Import from 'react-native-pdf-lib'
-import PDFLib, { PDFDocument, PDFPage } from 'react-native-pdf-lib';
+import PDFLib, { PDFDocument, PDFPage } from '@shogobg/react-native-pdf';
 
 // Modify first page in document
 const page1 = PDFPage
