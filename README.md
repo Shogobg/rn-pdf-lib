@@ -8,6 +8,13 @@
 
 This library's purpose is to fill the gap that currently exists in the React Native ecosystem for PDF creation and editing. It aims to provide an easy, simple, and consistent API for both **creating** new and **editing** existing PDF documents in React Native.
 
+### Compatibility matrix
+
+| pdf-lib | React Native | Expo  | Hermes | npm  | node  |
+| ------- | ------------ | ----- | ------ | ---- | ----- |
+| 1.1.5   | >= 0.69.0    | >= 45 | ✅     | >= 7 | >= 13 |
+| 1.1.4   | >= 0.66.0    | >= 45 | ✅     | >= 7 | >= 13 |
+
 ## Thanks
 
 This library would not be possible without the following projects:
@@ -36,8 +43,8 @@ Latest version that supported Android API 18 was 1.0.3
 
 See [here](#manual-installation) for manual installation instructions (manual installation should not be necessary).
 
-1. `$ npm install react-native-pdf-lib --save`
-2. `$ react-native link react-native-pdf-lib`
+1. `$ npm install @shogobg/react-native-pdf --save`
+2. `$ react-native link @shogobg/react-native-pdf`
 3. For Android, add the following to your app's `build.gradle` file:
    ```
    android {
@@ -54,8 +61,7 @@ See [here](#manual-installation) for manual installation instructions (manual in
 ### Create a New PDF Document
 
 ```javascript
-// Import from 'react-native-pdf-lib'
-import PDFLib, { PDFDocument, PDFPage } from 'react-native-pdf-lib';
+import PDFLib, { PDFDocument, PDFPage } from '@shogobg/react-native-pdf';
 
 // Create a PDF page with text and rectangles
 const page1 = PDFPage
@@ -117,8 +123,7 @@ PDFDocument
 ### Modify an Existing PDF Document
 
 ```javascript
-// Import from 'react-native-pdf-lib'
-import PDFLib, { PDFDocument, PDFPage } from 'react-native-pdf-lib';
+import PDFLib, { PDFDocument, PDFPage } from '@shogobg/react-native-pdf';
 
 // Modify first page in document
 const page1 = PDFPage
@@ -283,7 +288,7 @@ const finalPath = await PDFDocument.create(
 #### iOS
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-pdf-lib` and add `RNPdfLib.xcodeproj`
+2. Go to `node_modules` ➜ `@shogobg/react-native-pdf` and add `RNPdfLib.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libRNPdfLib.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)<
 
@@ -297,7 +302,7 @@ const finalPath = await PDFDocument.create(
 2. Append the following lines to `android/settings.gradle`:
    ```
    include ':react-native-pdf-lib'
-   project(':react-native-pdf-lib').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-pdf-lib/android')
+   project(':react-native-pdf-lib').projectDir = new File(rootProject.projectDir, 	'../node_modules/@shogobg/react-native-pdf/android')
    ```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
    ```
@@ -319,7 +324,7 @@ const finalPath = await PDFDocument.create(
 
 It is not possible to test changes to a native library independently of a runnable project.
 This library (and any react-native library with native code) depends on modules that will only exist if the library is built in the context of a full, runnable project.
-To test any changes, create a new react native project, and then clone the repository for react-native-pdf-lib into that project's node_modules directory. Next run react-native link on that project. Then, when you make changes to the library's code, you should be able to rebuild the runnable project to see the results.
+To test any changes, create a new react native project, and then clone the repository for @shogobg/react-native-pdf into that project's node_modules directory. Next run react-native link on that project. Then, when you make changes to the library's code, you should be able to rebuild the runnable project to see the results.
 
 [npm-image]: https://img.shields.io/npm/v/@shogobg/react-native-pdf.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/@shogobg/react-native-pdf
